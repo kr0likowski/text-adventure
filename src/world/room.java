@@ -33,10 +33,11 @@ public class room {
         actions.get(s);
         return true;
     }
+    System.out.println("No such action");
     return false;
     }
 
-    HashMap<String,Void> actions = new HashMap<>();
+    private HashMap<String,Void> actions = new HashMap<>();
 
     public ArrayList<item> getItems() {
         return items;

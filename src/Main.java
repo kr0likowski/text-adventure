@@ -11,6 +11,7 @@ public class Main {
         boolean action=true;
         Scanner input = new Scanner(System.in);
         Controller gameController = Controller.getInstance();
+        gameController.initGame();
         System.out.println("You're playing text-adventure game by Kr0likowski\n" +
                 "Rules:\n" +
                 "You have to go to the end of labyrinth and collect all the orbs\n" +

@@ -4,6 +4,7 @@ import world.WorldMap;
 import world.room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Controller {
     private static Controller ourInstance = new Controller();
@@ -76,13 +77,15 @@ public class Controller {
                 return movePlayer(3);
             case "west":
                return movePlayer(4);
-            default:
-                if(worldMap.getCurrentRoom().ifAction(command.toLowerCase()))
+            case "action":
+                for(String s: worldMap.getCurrentRoom().getActions().keySet())
                 {
-
+                    System.out.println(s);
                 }
+                return false;
+            default:
+                return worldMap.getCurrentRoom().makeAction(command.toLowerCase());
         }
-        return false;
 
     }
     public void displayRoom(){
