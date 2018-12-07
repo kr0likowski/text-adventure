@@ -11,5 +11,9 @@ public class player extends character {
     public void playerStatus(){
         System.out.println(this.getHp());
     }
+    public void addItem(item newItem)
+    {
+        inv.add(newItem);
+    }
 
 }

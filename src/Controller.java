@@ -66,16 +66,21 @@ public class Controller {
         return false;
     }
     public boolean handleInput(String command){
-        switch(command)
+        switch(command.toLowerCase())
         {
-            case "North":
+            case "north":
                 return movePlayer(1);
-            case "East":
+            case "east":
                return movePlayer(2);
-            case "South":
+            case "south":
                 return movePlayer(3);
-            case "West":
+            case "west":
                return movePlayer(4);
+            default:
+                if(worldMap.getCurrentRoom().ifAction(command.toLowerCase()))
+                {
+
+                }
         }
         return false;
 

@@ -26,7 +26,7 @@ public class character {
     }
 
     private String name;
-    private ArrayList<item> inv;
+    public ArrayList<item> inv;
     public character(int hp, int baseDmg, String name, ArrayList<item> inv){
         this.hp = hp;
         this.baseDmg = baseDmg;
