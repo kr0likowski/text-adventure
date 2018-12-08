@@ -22,12 +22,12 @@ public class Main {
                 "You can write hello to start");
 
         a=input.nextLine();
-        while(!a.equals("Exit"))
+        while(!a.equals("exit"))
         {
             if(action) {
                 gameController.displayRoom();
             }
-           a=input.nextLine();
+           a=input.nextLine().toLowerCase();
            action=gameController.handleInput(a);
         }
 

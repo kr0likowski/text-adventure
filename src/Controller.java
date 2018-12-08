@@ -18,7 +18,14 @@ public class Controller {
         worldMap.populateWorldMap();
     }
     ArrayList<item> inventory = new ArrayList<>();
-    player Player = new player(100, 5, "name", inventory);
+    private player Player = new player(100, 5, "name", inventory);
+    public boolean playerStatus(){
+        System.out.println(Player.getHp()+" hp\n"+Player.getBaseDmg()+" base dmg");
+        for(item i : Player.getInventory()){
+            i.itemInfo();
+        }
+        return false;
+    }
     public boolean movePlayer(int direction){
         switch(direction){
             case 1:
@@ -67,7 +74,7 @@ public class Controller {
         return false;
     }
     public boolean handleInput(String command){
-        switch(command.toLowerCase())
+        switch(command)
         {
             case "north":
                 return movePlayer(1);
@@ -83,8 +90,12 @@ public class Controller {
                     System.out.println(s);
                 }
                 return false;
+            case "exit":
+                return false;
+            case "status":
+                return playerStatus();
             default:
-                return worldMap.getCurrentRoom().makeAction(command.toLowerCase());
+                return worldMap.getCurrentRoom().makeAction(command.toLowerCase(),Player);
         }
 
     }

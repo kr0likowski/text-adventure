@@ -1,5 +1,6 @@
 package world;
 
+import characters.player;
 import items.item;
 
 import java.util.ArrayList;
@@ -16,28 +17,44 @@ public class room {
     }
     private int N;
 
-    public HashMap<String, Void> getActions() {
+    public HashMap<String, Integer> getActions() {
+        if(actions.isEmpty()){
+            System.out.println("No actions");
+        }
         return actions;
     }
-    public void addAction(String s, Void v)
+    public void addAction(String s, int i)
     {
-        actions.put(s,v);
+        actions.put(s,i);
     }
     public boolean ifAction(String s)
     {
        return actions.containsKey(s);
     }
-    public boolean makeAction(String s){
+    public void removeAction(String s)
+    {
+        actions.remove(s);
+    }
+    public boolean makeAction(String s, player p){
         if(ifAction(s))
     {
-        actions.get(s);
+       switch (actions.get(s)){
+           case 1:
+               System.out.println("Got Orb");
+               p.addItem(new item("orb","normal orb",5));
+               removeAction(s);
+               break;
+           case 2:
+               break;
+
+       }
         return true;
-    }
+    }else{
     System.out.println("No such action");
-    return false;
+    return false;}
     }
 
-    private HashMap<String,Void> actions = new HashMap<>();
+    private HashMap<String,Integer> actions = new HashMap<>();
 
     public ArrayList<item> getItems() {
         return items;
