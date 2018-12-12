@@ -23,12 +23,26 @@ public class Main {
 
         a=input.nextLine();
         while(!a.equals("exit"))
-        {
-            if(action) {
-                gameController.displayRoom();
-            }
-           a=input.nextLine().toLowerCase();
-           action=gameController.handleInput(a);
+        { if(gameController.playerAlive()){
+
+                if(gameController.isEnemy()){
+                    gameController.worldMap.getCurrentRoom().getRoomEnemy().enemyStatus();
+                    a=input.nextLine().toLowerCase();
+                    action=gameController.handleFight(a);
+                }
+                else {
+                    if(action) {
+                    gameController.displayRoom();
+                }
+                    a = input.nextLine().toLowerCase();
+                    action = gameController.handleInput(a);
+                }
+        }
+        else{
+            System.out.println("You died");
+            a="exit";
+        }
+
         }
 
 

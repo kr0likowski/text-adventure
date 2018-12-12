@@ -5,10 +5,12 @@ import world.room;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Controller {
     private static Controller ourInstance = new Controller();
     WorldMap worldMap;
+    Random gen = new Random();
 
     public static Controller getInstance() {
         return ourInstance;
@@ -18,13 +20,16 @@ public class Controller {
         worldMap.populateWorldMap();
     }
     ArrayList<item> inventory = new ArrayList<>();
-    private player Player = new player(100, 5, "name", inventory);
+    private player Player = new player(100, 50, "name", inventory);
     public boolean playerStatus(){
         System.out.println(Player.getHp()+" hp\n"+Player.getBaseDmg()+" base dmg");
         for(item i : Player.getInventory()){
             i.itemInfo();
         }
         return false;
+    }
+    public boolean isEnemy(){
+        return worldMap.getCurrentRoom().getRoomEnemy()!=null && worldMap.getCurrentRoom().getRoomEnemy().getHp()>=0;
     }
     public boolean movePlayer(int direction){
         switch(direction){
@@ -99,9 +104,41 @@ public class Controller {
         }
 
     }
+    public boolean handleFight(String command){
+        switch(command){
+            case "attack":
+                System.out.println("You attack for "+ Player.getBaseDmg() +" dmg");
+                worldMap.getCurrentRoom().getRoomEnemy().decreaseHP(Player.getBaseDmg());
+                if(worldMap.getCurrentRoom().getRoomEnemy().getHp()<=0){
+                    worldMap.getCurrentRoom().enemyDefeated();
+                }else {
+                    System.out.println("Enemy's turn");
+                    System.out.println("Enemy attack for " + worldMap.getCurrentRoom().getRoomEnemy().getBaseDmg());
+                    Player.decreaseHP(worldMap.getCurrentRoom().getRoomEnemy().getBaseDmg());
+                }
+                return true;
+            case "run":
+                int a=gen.nextInt(10);
+                if(a>6)
+                {
+                   worldMap.move(worldMap.lastRoom);
+                }else{
+                    System.out.println("You failed to run");
+                    System.out.println("Enemy's turn");
+                    System.out.println("Enemy attack for " + worldMap.getCurrentRoom().getRoomEnemy().getBaseDmg());
+                    Player.decreaseHP(worldMap.getCurrentRoom().getRoomEnemy().getBaseDmg());
+                }
+                return true;
+
+        }
+        return false;
+    }
     public void displayRoom(){
         room currentRoom = worldMap.getCurrentRoom();
         System.out.println(currentRoom.getDescription());
+    }
+    public boolean playerAlive(){
+        return Player.getHp()>=0;
     }
     private Controller() {
     }

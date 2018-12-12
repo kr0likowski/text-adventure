@@ -1,5 +1,6 @@
 package world;
 
+import characters.enemy;
 import characters.player;
 import items.item;
 
@@ -15,13 +16,32 @@ public class room {
         Name=name;
         this.description = description;
     }
+    private enemy roomEnemy;
     private int N;
+    public enemy getRoomEnemy(){
+        if(roomEnemy!=null){
+            return roomEnemy;
+        }
+        return null;
+    }
+    public void setEnemy(enemy e){
+        roomEnemy=e;
+
+    }
+    public void enemyDefeated(){
+        System.out.println("Enemy Defeated!");
+        roomEnemy=null;
+    }
+
 
     public HashMap<String, Integer> getActions() {
         if(actions.isEmpty()){
             System.out.println("No actions");
         }
         return actions;
+    }
+    public void containsEnemy(){
+
     }
     public void addAction(String s, int i)
     {

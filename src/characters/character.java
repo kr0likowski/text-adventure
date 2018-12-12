@@ -20,6 +20,9 @@ public class character {
     public String getName() {
         return name;
     }
+    public void decreaseHP(int a){
+        hp-=a;
+    }
 
     public ArrayList<item> getInventory() {
         return inv;
