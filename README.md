@@ -7,13 +7,11 @@ Singletons
 
 Hashmaps
 
+Randomness
+
 
 ## TODO
 Save system 
 
 More rooms
-
-Enemies
-
-Battle System
 
